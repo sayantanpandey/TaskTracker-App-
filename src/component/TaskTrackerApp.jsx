@@ -68,11 +68,14 @@ const TaskTrackerApp = () => {
   };
 
   const handleMarkTaskAsCompleted = (index) => {
+    const taskToMark = tasks[index];
     const newTasks = [...tasks];
-    const completedTask = newTasks.splice(index, 1)[0];
+    newTasks[index] = { ...taskToMark, completed: true };
     setTasks(newTasks);
-    setCompletedTasks([...completedTasks, completedTask]);
+  
+    setCompletedTasks([...completedTasks, taskToMark]);
   };
+  
 
   const handleDeleteCompletedTask = (index) => {
     const newCompletedTasks = [...completedTasks];
@@ -113,112 +116,75 @@ const TaskTrackerApp = () => {
           >
             Task Tracker
           </Typography>
-          <IconButton onClick={handleThemeChange} sx={{ color: "inherit" }}>
-            {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+          <IconButton onClick={() => setTabValue(2)} sx={{ color: "inherit" }}>
+            <SettingsIcon />
           </IconButton>
         </Toolbar>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-  <Tabs
-    value={tabValue}
-    onChange={handleChangeTab}
-    indicatorColor="primary"
-    textColor="inherit"
-    sx={{
-      display: "flex",
-      flexDirection: isMobile ? "column" : "row", // Change direction to column on mobile
-      alignItems: "center",
-      justifyContent: isMobile ? "center" : "space-between", // Center tabs on mobile
-    }}
-  >
-    <Tab
-      label={
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <PlaylistAddCheckIcon sx={{ fontSize: isMobile ? 18 : 24 }} /> {/* Adjusted icon size */}
-          Tasks
-        </Box>
-      }
-      sx={{
-        flex: isMobile ? "1 1 auto" : "0 1 auto", // Allow tabs to grow on mobile
-        fontWeight: tabValue === 0 ? "bold" : "normal",
-        color: "white",
-        "&.Mui-selected": {
-          color: "white",
-        },
-        fontSize: isMobile ? 12 : 16, // Adjusted font size for mobile
-         // Add space between tabs on mobile
-        marginRight: isMobile ? 0 : 10, // Adjust margin for tabs on mobile
-      }}
-    />
-    <Tab
-      label={
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
+            mt: 2,
+            overflowX: "auto",
           }}
         >
-          <CheckCircleOutlineIcon
+          <Tabs
+            value={tabValue}
+            onChange={handleChangeTab}
+            indicatorColor="primary"
+            textColor="inherit"
             sx={{
-              fontSize: isMobile ? 14 : 20,
-              marginRight: isMobile ? 0.5 : 1,
+              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
+              flexWrap: isMobile ? "nowrap" : "wrap",
+              alignItems: "center",
+              justifyContent: isMobile ? "center" : "space-between",
             }}
-          />
-          <span style={{ marginLeft: isMobile ? -1 : 3 }}>
-            {/* Adjusted margin for mobile */}
-            Completed Tasks
-            <span
-              style={{
-                marginLeft: 3,
+          >
+            <Tab
+              label={
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <PlaylistAddCheckIcon
+                    sx={{ fontSize: isMobile ? 18 : 24, margin: 0, padding: 0 }}
+                  />
+                  <span style={{ margin: 0, padding: 0 }}>Tasks</span>
+                </Box>
+              }
+              sx={{
+                flex: isMobile ? "1 1 auto" : "0 1 auto",
+                fontWeight: tabValue === 0 ? "bold" : "normal",
+                color: "white",
+                "&.Mui-selected": {
+                  color: "white",
+                },
                 fontSize: isMobile ? 12 : 16,
-                fontWeight: "bold",
+                marginRight: isMobile ? 0 : 10,
               }}
-            >
-              ({completedTasks.length})
-            </span>
-          </span>
+            />
+            <Tab
+              label={
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <CheckCircleOutlineIcon
+                    sx={{ fontSize: isMobile ? 14 : 20, margin: 0, padding: 0 }}
+                  />
+                  <span style={{ margin: 0, padding: 0 }}>Completed Tasks</span>
+                </Box>
+              }
+              onClick={() => setTabValue(1)}
+              sx={{
+                flex: isMobile ? "1 1 auto" : "0 1 auto",
+                fontWeight: tabValue === 1 ? "bold" : "normal",
+                color: "white",
+                "&.Mui-selected": {
+                  color: "white",
+                },
+                fontSize: isMobile ? 12 : 16,
+                marginRight: isMobile ? 0 : 10,
+              }}
+            />
+            
+          </Tabs>
         </Box>
-      }
-      sx={{
-        flex: isMobile ? "1 1 auto" : "0 1 auto", // Allow tabs to grow on mobile
-        fontWeight: tabValue === 1 ? "bold" : "normal",
-        color: "white",
-        "&.Mui-selected": {
-          color: "white",
-        },
-        fontSize: isMobile ? 12 : 16, // Adjusted font size for mobile
-        // Add space between tabs on mobile
-        marginRight: isMobile ? 0 : 10, // Adjust margin for tabs on mobile
-      }}
-    />
-
-    <Tab
-      label={
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <SettingsIcon
-            sx={{
-              fontSize: isMobile ? 14 : 20,
-              marginRight: isMobile ? 0 : 1,
-            }}
-          />
-          Settings
-        </Box>
-      }
-      sx={{
-        flex: isMobile ? "1 1 auto" : "0 1 auto", // Allow tabs to grow on mobile
-        fontWeight: tabValue === 2 ? "bold" : "normal",
-        color: "white",
-        "&.Mui-selected": {
-          color: "white",
-        },
-        fontSize: isMobile ? 12 : 16, // Adjusted font size for mobile
-        // Add space between tabs on mobile
-        marginRight: isMobile ? 0 : 10, // Adjust margin for tabs on mobile
-      }}
-    />
-  </Tabs>
-</Box>
-
       </AppBar>
       <Container sx={{ mt: 8 }}>
         <Box
