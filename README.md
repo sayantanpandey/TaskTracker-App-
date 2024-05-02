@@ -1,6 +1,6 @@
 # Task Tracker App
 
-This is a simple task tracker application built with React and Material-UI.
+This is a Task Tracker application built using React JS and Material-UI. It demonstrates understanding of hooks, states, props, components, basic CRUD operations, responsive design, and Material-UI integration.
 
 ## Features
 
@@ -37,4 +37,4 @@ To run this application locally, follow these steps:
 - **React Router**: Library for declarative routing in React applications
 
 ## Author
-[Sayantan Pandey]((https://github.com/sayantanpandey))
+[Sayantan Pandey](https://github.com/sayantanpandey)
