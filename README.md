@@ -1,12 +1,12 @@
-# Getting Started with Create React App
+# Task Tracker App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a Task Tracker application built using React JS and Material-UI. It demonstrates understanding of hooks, states, props, components, basic CRUD operations, responsive design, and Material-UI integration.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
-
-### `npm start`
+To run this application locally, follow these steps:
+1. Clone this repository to your local machine:
+### `git clone <repository-url>`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
